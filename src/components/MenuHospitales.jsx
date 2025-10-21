@@ -29,7 +29,7 @@ export default class MenuHospitales extends Component {
     return (
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
         <div className="container-fluid">
-          <a className="navbar-brand" href="#">
+          <a className="navbar-brand" href="/">
             Navbar
           </a>
           <button
@@ -48,6 +48,11 @@ export default class MenuHospitales extends Component {
               <li className="nav-item">
                 <NavLink className="nav-link" to="/">
                   Home
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/create-hospital">
+                  Create Hospital
                 </NavLink>
               </li>
               <li className="nav-item dropdown">

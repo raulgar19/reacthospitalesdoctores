@@ -1,12 +1,15 @@
 import React, { Component } from "react";
 import Global from "../Global";
 import axios from "axios";
+import { NavLink } from "react-router-dom";
+import DetallesDoctor from "./DetallesDoctor";
 
 export default class Doctores extends Component {
   url = Global.apiDoctores;
 
   state = {
     doctores: [],
+    doctor: null,
   };
 
   loadDoctores = () => {
@@ -16,6 +19,12 @@ export default class Doctores extends Component {
       this.setState({
         doctores: response.data,
       });
+    });
+  };
+
+  loadDetallesDoctor = (doctor) => {
+    this.setState({
+      doctor: doctor,
     });
   };
 
@@ -42,6 +51,7 @@ export default class Doctores extends Component {
               <th>Apellido</th>
               <th>Especialidad</th>
               <th>Salario</th>
+              <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
@@ -52,11 +62,22 @@ export default class Doctores extends Component {
                   <td>{doctor.apellido}</td>
                   <td>{doctor.especialidad}</td>
                   <td>{doctor.salario}</td>
+                  <td>
+                    <button
+                      className="btn btn-info"
+                      onClick={() => {
+                        this.loadDetallesDoctor(doctor);
+                      }}
+                    >
+                      Detalles
+                    </button>
+                  </td>
                 </tr>
               );
             })}
           </tbody>
         </table>
+        {this.state.doctor && <DetallesDoctor doctor={this.state.doctor} />}
       </div>
     );
   }
