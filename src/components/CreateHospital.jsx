@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { Component } from "react";
 import Global from "../Global";
+import { Navigate } from "react-router-dom";
 
 export default class CreateHospital extends Component {
   url = Global.apiHospitales;
@@ -12,6 +13,7 @@ export default class CreateHospital extends Component {
 
   state = {
     mensaje: "",
+    status: false,
   };
 
   insertHospital = (event) => {
@@ -29,6 +31,7 @@ export default class CreateHospital extends Component {
     axios.post(this.url + request, hospital).then((response) => {
       this.setState({
         mensaje: "Hospital añadido correctamente",
+        status: true,
       });
     });
   };
@@ -36,6 +39,7 @@ export default class CreateHospital extends Component {
   render() {
     return (
       <div>
+        {this.state.status === true && <Navigate to="/hospitales" />}
         <h1>Create Hospital</h1>
         {this.state.mensaje && (
           <h3 style={{ color: "fuchsia" }}>{this.state.mensaje}</h3>
